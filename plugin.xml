@@ -30,7 +30,7 @@
       <source-file framework="true" src="src/ios/FFMpegiOS/lib/libswscale.a" />
    </platform>
    <platform name="android">
-      <dependency id="libstreaming"/>
+      <framework src="build-extras.gradle" custom="true" type="gradleReference" />
       <config-file parent="/*" target="res/xml/config.xml">
          <feature name="rtsplayer">
             <param name="android-package" value="br.com.stek.rtsplayer.rtsplayer" />
