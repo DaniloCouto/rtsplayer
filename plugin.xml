@@ -30,7 +30,6 @@
       <source-file framework="true" src="src/ios/FFMpegiOS/lib/libswscale.a" />
    </platform>
    <platform name="android">
-      <framework src="net.majorkernelpanic.streaming:libstreaming" />
       <config-file parent="/*" target="res/xml/config.xml">
          <feature name="rtsplayer">
             <param name="android-package" value="br.com.stek.rtsplayer.rtsplayer" />
@@ -100,5 +99,6 @@
      
       <source-file src="src/android/rtsplayer.java" target-dir="src/br/com/stek/rtsplayer" />
       <source-file src="src/android/rtsplayerActivity.java" target-dir="src/br/com/stek/rtsplayer" />
+      <source-file src="src/android/libstreamingActivity.java" target-dir="src/br/com/stek/rtsplayer" />
    </platform>
 </plugin>
