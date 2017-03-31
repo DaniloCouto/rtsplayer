@@ -1,5 +1,13 @@
 package br.com.stek.rtsplayer;
 
+import net.majorkernelpanic.streaming.MediaStream;
+import net.majorkernelpanic.streaming.Session;
+import net.majorkernelpanic.streaming.SessionBuilder;
+import net.majorkernelpanic.streaming.audio.AudioQuality;
+import net.majorkernelpanic.streaming.gl.SurfaceView;
+import net.majorkernelpanic.streaming.rtsp.RtspClient;
+import net.majorkernelpanic.streaming.video.VideoQuality;
+
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -21,15 +29,19 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-public class rtsplayerActivity extends Activity implements SurfaceHolder.Callback, MediaPlayer.OnErrorListener , MediaPlayer.OnPreparedListener {
+public class libstreamingActivity extends Activity implements SurfaceHolder.Callback, MediaPlayer.OnErrorListener , MediaPlayer.OnPreparedListener {
 
     private MediaPlayer mediaPlayer;
     private LinearLayout layout;
-    private SurfaceView surfaceView;
+    private SurfaceView mSurfaceView;
     private SurfaceHolder surfaceHolder;
-    private String videoSrc;
-    private Boolean isRtsp;
-    private RtpMediaDecoder rtpMediaDecoder;
+    private String ip;
+    private Number port;
+    private String path;
+    private String username;
+    private String password;
+    private SessionBuilder mSession;
+    private RtspClient mClient;
 
 
     @Override
@@ -43,13 +55,14 @@ public class rtsplayerActivity extends Activity implements SurfaceHolder.Callbac
 
         Bundle extras  = getIntent().getExtras();
         if (extras != null) {
-            videoSrc = extras.getString("VIDEO_URL");
+            ip = extras.getString("IP");
+            port = Integer.parseInt(extras.getString("PORT"));
+            path = extras.getString("PATH");
+            username = extras.getString("USERNAME");
+            password  = extras.getString("PASSWORD");
         } else {
             finishWithError();
         }
-
-        Log.d("FLP","rtsplayerActivity videoSrc"+videoSrc);
-
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -59,7 +72,7 @@ public class rtsplayerActivity extends Activity implements SurfaceHolder.Callbac
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         layout.setLayoutParams(layoutParams);
 
-        // add the surfaceView with the current video
+        // add the mSurfaceView with the current video
         createVideoView();
 
         // add to the view
@@ -67,35 +80,40 @@ public class rtsplayerActivity extends Activity implements SurfaceHolder.Callbac
     }
 
     private void createVideoView() {
-        surfaceView = new SurfaceView(getApplicationContext());
-        surfaceView.setOnClickListener(new View.OnClickListener() {
+        mSurfaceView = new SurfaceView(getApplicationContext());
+        mSurfaceView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Para sair clique em voltar",Toast.LENGTH_SHORT).show();
             }
         });
-        surfaceHolder = surfaceView.getHolder();
-        surfaceHolder.addCallback(this);
+        mSession = SessionBuilder.getInstance()
+				.setContext(getApplicationContext())
+				.setAudioEncoder(SessionBuilder.AUDIO_NONE)
+				.setVideoEncoder(SessionBuilder.VIDEO_H264)
+				.setSurfaceView(mSurfaceView)
+				.setPreviewOrientation(0)
+                .setVideoQuality(VideoQuality.DEFAULT_VIDEO_QUALITY)
+				.setCallback(this)
+				.build();
 
-        layout.addView(surfaceView);
+		// Configures the RTSP client
+		mClient = new RtspClient();
+		mClient.setSession(mSession);
+		mClient.setCallback(this);
+        mClient.setTransportMode(RtspClient.TRANSPORT_TCP);
+        surfaceHolder = mSurfaceView.getHolder(); 
+        surfaceHolder.addCallback(this);
+        layout.addView(mSurfaceView);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         try {
-            // Surface ready, add the mediaPlayer to it
-            mediaPlayer = new MediaPlayer();
-
-            // Setting up media player
-            mediaPlayer.setDisplay(surfaceHolder);
-            mediaPlayer.setDataSource(videoSrc);
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setVolume(0f,0f);
-            mediaPlayer.setScreenOnWhilePlaying(true);
-            mediaPlayer.setOnPreparedListener(this);
-            mediaPlayer.setOnErrorListener(this);
-
-            mediaPlayer.prepareAsync();
+            mClient.setCredentials(username, password);
+			mClient.setServerAddress(ip, port);
+			mClient.setStreamPath("/"+path);
+			mClient.startStream();
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "Falha ao abrir video",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -105,32 +123,9 @@ public class rtsplayerActivity extends Activity implements SurfaceHolder.Callbac
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//        if (mediaPlayer.isPlaying()) {
-//            mediaPlayer.stop();
-//            mediaPlayer.release();
-//        } else {
-//            mediaPlayer.start();
-//        }
-    }
-
-    @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-        }
-    }
-
-
-
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-        Log.d("FLP", "onPrepared fired");
-        if(isRtsp){
-            rtpMediaDecoder.start();
-        }else{
-            mediaPlayer.start();
+        if (mClient.isStreaming()) {
+            mClient.stopStream();
         }
     }
 
@@ -155,6 +150,14 @@ public class rtsplayerActivity extends Activity implements SurfaceHolder.Callbac
         setResult(100);
         finish();
     }
+
+    @Override
+	public void onDestroy(){
+		super.onDestroy();
+		mClient.release();
+		mSession.release();
+		mSurfaceView.getHolder().removeCallback(this);
+	}
 
 
 }

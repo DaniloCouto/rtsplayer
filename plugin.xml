@@ -30,6 +30,12 @@
       <source-file framework="true" src="src/ios/FFMpegiOS/lib/libswscale.a" />
    </platform>
    <platform name="android">
+      <dependency id="libstreaming"/>
+      <config-file parent="/*" target="res/xml/config.xml">
+         <feature name="rtsplayer">
+            <param name="android-package" value="br.com.stek.rtsplayer.rtsplayer" />
+         </feature>
+      </config-file>
       <config-file parent="/*" target="res/xml/config.xml">
          <feature name="rtsplayer">
             <param name="android-package" value="br.com.stek.rtsplayer.rtsplayer" />
@@ -37,8 +43,6 @@
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml">
          <uses-permission android:name="android.permission.INTERNET" />
-         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-         <uses-permission android:name="android.permission.WAKE_LOCK" />
          <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
          <uses-permission android:name="android.permission.RECORD_AUDIO" />
          <uses-permission android:name="android.permission.CAMERA" />

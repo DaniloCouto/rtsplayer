@@ -33,6 +33,24 @@ public class rtsplayer extends CordovaPlugin {
             Log.d("FLP","Adicionaod extra: "+videoUrl);
             cordova.startActivityForResult(this, intent, 0);
             return true;
+        } else if (action.equals("watchRtsp")) {
+            this.callbackContext = callbackContext;
+            String íp = args.getString(0);
+            String port = args.getNumber(1);
+            String path = args.getString(2);
+            String username = args.getString(3);
+            String pasword = args.getString(4);
+            
+            Context context = cordova.getActivity().getApplicationContext();
+            Intent intent = new Intent(context, libstreamingActivity.class);
+            intent.putExtra("IP", íp);
+            intent.putExtra("PORT", port);
+            intent.putExtra("PATH", path);
+            intent.putExtra("USERNAME", username);
+            intent.putExtra("PASSWORD", pasword);
+            Log.d("FLP","Adicionaod extra: "+íp+":"+port+"/"+path);
+            cordova.startActivityForResult(this, intent, 0);
+            return true;
         }
 
         return false;
