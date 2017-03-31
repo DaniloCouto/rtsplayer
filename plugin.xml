@@ -50,52 +50,53 @@
        <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="br.com.stek.rtsplayer.rtsplayerActivity"></activity>
       </config-file>
-      <source-file src="libs/net/majorkernelpanic/streaming/Stream.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/SessionBuilder.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/Session.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/MediaStream.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/video/CodecManager.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/video/H263Stream.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/video/H264Stream.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/video/VideoQuality.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/video/VideoStream.java"  />
- 
-      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/RtcpDeinterleaver.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/RtspClient.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/RtspServer.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/UriParser.java" />
- 
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AACADTSPacketizer.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AACLATMPacketizer.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AbstractPacketizer.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AMRNBPacketizer.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/H263Packetizer.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/H264Packetizer.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/MediaCodecInputStream.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/rtp/RtpSocket.java" />
-       
-      <source-file src="libs/net/majorkernelpanic/streaming/rtcp/SenderReport.java" />
- 
-      <source-file src="libs/net/majorkernelpanic/streaming/mp4/MP4Config.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/mp4/MP4Parser.java" />
+      <source-file src="libs/net/majorkernelpanic/streaming/Stream.java" target-dir="libs/net/majorkernelpanic/streaming" />
+      <source-file src="libs/net/majorkernelpanic/streaming/SessionBuilder.java" target-dir="libs/net/majorkernelpanic/streaming"  />
+      <source-file src="libs/net/majorkernelpanic/streaming/Session.java" target-dir="libs/net/majorkernelpanic/streaming"  />
+      <source-file src="libs/net/majorkernelpanic/streaming/MediaStream.java" target-dir="libs/net/majorkernelpanic/streaming" />
 
-      <source-file src="libs/net/majorkernelpanic/streaming/hw/CodecManager.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/hw/EncoderDebugger.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/hw/NV21Convertor.java"  />
+      <source-file src="libs/net/majorkernelpanic/streaming/video/CodecManager.java" target-dir="libs/net/majorkernelpanic/streaming/video" />
+      <source-file src="libs/net/majorkernelpanic/streaming/video/H263Stream.java" target-dir="libs/net/majorkernelpanic/streaming/video" />
+      <source-file src="libs/net/majorkernelpanic/streaming/video/H264Stream.java" target-dir="libs/net/majorkernelpanic/streaming/video" />
+      <source-file src="libs/net/majorkernelpanic/streaming/video/VideoQuality.java" target-dir="libs/net/majorkernelpanic/streaming/video" />
+      <source-file src="libs/net/majorkernelpanic/streaming/video/VideoStream.java" target-dir="libs/net/majorkernelpanic/streaming/video" />
+ 
+      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/RtcpDeinterleaver.java" target-dir="libs/net/majorkernelpanic/streaming/rtsp" />
+      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/RtspClient.java" target-dir="libs/net/majorkernelpanic/streaming/rtsp" />
+      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/RtspServer.java" target-dir="libs/net/majorkernelpanic/streaming/rtsp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtsp/UriParser.java" target-dir="libs/net/majorkernelpanic/streaming/rtsp"/>
+ 
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AACADTSPacketizer.java"  target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AACLATMPacketizer.java"  target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AbstractPacketizer.java" target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/AMRNBPacketizer.java"  target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/H263Packetizer.java" target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/H264Packetizer.java" target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/MediaCodecInputStream.java" target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/rtp/RtpSocket.java" target-dir="libs/net/majorkernelpanic/streaming/rtp"/>
        
-      <source-file src="libs/net/majorkernelpanic/streaming/gl/SurfaceManager.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/gl/SurfaceView.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/gl/TextureManager.java"  />
+      <source-file src="libs/net/majorkernelpanic/streaming/rtcp/SenderReport.java" target-dir="libs/net/majorkernelpanic/streaming/rtcp"/>
+ 
+      <source-file src="libs/net/majorkernelpanic/streaming/mp4/MP4Config.java" target-dir="libs/net/majorkernelpanic/streaming/mp4"/>
+      <source-file src="libs/net/majorkernelpanic/streaming/mp4/MP4Parser.java" target-dir="libs/net/majorkernelpanic/streaming/mp4"/>
+
+      <source-file src="libs/net/majorkernelpanic/streaming/hw/CodecManager.java" target-dir="libs/net/majorkernelpanic/streaming/hw" />
+      <source-file src="libs/net/majorkernelpanic/streaming/hw/EncoderDebugger.java" target-dir="libs/net/majorkernelpanic/streaming/hw" />
+      <source-file src="libs/net/majorkernelpanic/streaming/hw/NV21Convertor.java" target-dir="libs/net/majorkernelpanic/streaming/hw" />
        
-      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/CameraInUseException.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/ConfNotSupportedException.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/InvalidSurfaceException.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/StorageUnavailableException.java"  />
+      <source-file src="libs/net/majorkernelpanic/streaming/gl/SurfaceManager.java" target-dir="libs/net/majorkernelpanic/streaming/gl" />
+      <source-file src="libs/net/majorkernelpanic/streaming/gl/SurfaceView.java" target-dir="libs/net/majorkernelpanic/streaming/gl" />
+      <source-file src="libs/net/majorkernelpanic/streaming/gl/TextureManager.java" target-dir="libs/net/majorkernelpanic/streaming/gl" />
+       
+      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/CameraInUseException.java" target-dir="libs/net/majorkernelpanic/streaming/exceptions" />
+      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/ConfNotSupportedException.java" target-dir="libs/net/majorkernelpanic/streaming/exceptions" />
+      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/InvalidSurfaceException.java" target-dir="libs/net/majorkernelpanic/streaming/exceptions" />
+      <source-file src="libs/net/majorkernelpanic/streaming/exceptions/StorageUnavailableException.java" target-dir="libs/net/majorkernelpanic/streaming/exceptions" />
       
-      <source-file src="libs/net/majorkernelpanic/streaming/audio/AACStream.java" />
-      <source-file src="libs/net/majorkernelpanic/streaming/audio/AMRNBStream.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/audio/AudioQuality.java"  />
-      <source-file src="libs/net/majorkernelpanic/streaming/audio/AudioStream.java" />
+      <source-file src="libs/net/majorkernelpanic/streaming/audio/AACStream.java" target-dir="libs/net/majorkernelpanic/streaming/audio" />
+      <source-file src="libs/net/majorkernelpanic/streaming/audio/AMRNBStream.java" target-dir="libs/net/majorkernelpanic/streaming/audio" />
+      <source-file src="libs/net/majorkernelpanic/streaming/audio/AudioQuality.java" target-dir="libs/net/majorkernelpanic/streaming/audio" />
+      <source-file src="libs/net/majorkernelpanic/streaming/audio/AudioStream.java" target-dir="libs/net/majorkernelpanic/streaming/audio" />
      
       <source-file src="src/android/rtsplayer.java" target-dir="src/br/com/stek/rtsplayer" />
       <source-file src="src/android/rtsplayerActivity.java" target-dir="src/br/com/stek/rtsplayer" />
